@@ -1,4 +1,9 @@
 #!/bin/bash
 
-/etc/init.d/kiwiirc restart
-
+# Restart kiwiric
+if [ -d "/run/systemd/system" ]; then
+    systemctl deamon-reload
+    systemctl restart kiwiirc
+else
+    service kiwiirc restart
+fi

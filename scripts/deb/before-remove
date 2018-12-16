@@ -1,4 +1,12 @@
 #!/bin/bash
 
-/etc/init.d/kiwiirc stop
-update-rc.d -f kiwiirc remove
+# Disable kiwiirc at startup and stop kiwiirc
+if [ -d "/run/systemd/system" ]; then
+    systemctl stop kiwiirc
+    systemctl disable kiwiirc
+else
+    service kiwiirc stop
+    update-rc.d -f kiwiirc remove
+fi
+
+

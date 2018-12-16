@@ -120,6 +120,7 @@ make_deb() {
 	--vendor "$vendor_name" \
 	--license "$license_short" \
 	--deb-init scripts/init/kiwiirc \
+	--deb-systemd scripts/systemd/kiwiirc.service \
 	--after-install scripts/deb/after-install \
 	--before-remove scripts/deb/before-remove \
 	--after-upgrade scripts/deb/after-upgrade
@@ -141,6 +142,7 @@ make_rpm() {
 	--vendor "$vendor_name" \
 	--license "$license_short" \
 	--rpm-init scripts/init/kiwiirc \
+	--rpm-systemd scripts/systemd/kiwiirc.service \
 	--after-install scripts/rpm/after-install \
 	--before-remove scripts/rpm/before-remove \
 	--after-upgrade scripts/rpm/after-upgrade \

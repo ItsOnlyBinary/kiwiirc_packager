@@ -1,5 +1,19 @@
 #!/bin/bash
 
+# Copy our example config
 cp -u /etc/kiwiirc/config.conf.example /etc/kiwiirc/config.conf
-update-rc.d kiwiirc defaults
-/etc/init.d/kiwiirc start
+
+# Create our user and data directory
+useradd --system --group kiwiirc
+mkdir /usr/lib/kiwiirc/
+chown kiwiirc:kiwiirc -R /usr/lib/kiwiirc
+
+# Enable kiwiirc at startup and start kiwiirc
+if [ -d "/run/systemd/system" ]; then
+    systemctl enable kiwiirc
+    systemctl start kiwiirc
+else
+    update-rc.d kiwiirc defaults
+    service kiwiirc start
+fi
+

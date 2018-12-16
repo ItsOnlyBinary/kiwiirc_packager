@@ -1,6 +1,11 @@
 #!/bin/bash
 
-/etc/init.d/kiwiirc stop
-chkconfig kiwiirc off
-chkconfig --del kiwiirc
-
+# Disable kiwiirc at startup and stop kiwiirc
+if [ -d "/run/systemd/system" ]; then
+    systemctl stop kiwiirc
+    systemctl disable kiwiirc
+else
+    service kiwiirc stop
+    chkconfig kiwiirc off
+    chkconfig --del kiwiirc
+fi
